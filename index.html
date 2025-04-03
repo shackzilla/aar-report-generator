@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AAR Report Generator</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      background-color: rgb(55, 61, 53);
+      color: #dcdcdc;
+    }
+    h1 {
+      color: #ff6611;
+      text-transform: uppercase;
+      text-align: center;
+      border-bottom: 2px solid #dcdcdc;
+      padding-bottom: 10px;
+    }
+    label {
+      font-weight: bold;
+    }
+    textarea, input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px 0;
+      background-color: #2a3329;
+      color: #dcdcdc;
+      border: 1px solid #888;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #556b2f;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    button:hover {
+      background-color: #6b8e23;
+    }
+    #output {
+      white-space: pre-wrap;
+      background: #1e1e1e;
+      padding: 10px;
+      border: 1px solid #555;
+      margin-top: 20px;
+      color: #dcdcdc;
+    }
+  </style>
+</head>
+<body>
+  <h1>AFTER ACTION REPORT GENERATOR</h1>
+
+  <label>UNIT REPORTING</label>
+  <select id="unit">
+    <option value="">-- Select Unit --</option>
+    <option>Outlaw 1</option>
+    <option>Outlaw 1-1</option>
+    <option>Outlaw 1-2</option>
+    <option>Outlaw 1-3</option>
+    <option>Outlaw 1-1-A</option>
+    <option>Outlaw 1-1-B</option>
+    <option>Outlaw 1-1-C</option>
+    <option>Outlaw 1-2-A</option>
+    <option>Outlaw 1-2-B</option>
+    <option>Outlaw 1-2-C</option>
+    <option>Outlaw 1-3-A</option>
+    <option>Outlaw 1-3-B</option>
+    <option>Outlaw 1-3-C</option>
+  </select>
+
+  <label>DATE (e.g. 06JUN25)</label>
+  <input type="text" id="date">
+
+  <label>MAP</label>
+  <input type="text" id="map">
+
+  <label>SIZE AND COMPOSITION OF PATROL</label>
+  <textarea id="composition"></textarea>
+
+  <label>REQUIRED ATTENDEES</label>
+  <textarea id="required"></textarea>
+
+  <label>ABSENT</label>
+  <textarea id="absent"></textarea>
+
+  <label>NON-REQUIRED ATTENDEES</label>
+  <textarea id="nonRequired"></textarea>
+
+  <label>RESULTS OF ENCOUNTER WITH ENEMY</label>
+  <textarea id="results"></textarea>
+
+  <label>CONDITION OF PATROL INCLUDING DISPOSITION OF ANY DEAD OR WOUNDED</label>
+  <textarea id="condition"></textarea>
+
+  <label>VEHICLE STATUS (IF APPLICABLE)</label>
+  <textarea id="vehicle"></textarea>
+
+  <label>Sustains</label>
+  <textarea id="sustains"></textarea>
+
+  <label>Improves</label>
+  <textarea id="improves"></textarea>
+
+  <label>COMMENTS</label>
+  <textarea id="comments"></textarea>
+
+  <label>Respectfully Submitted,</label>
+  <input type="text" id="name" placeholder="Name">
+  <input type="text" id="billet" placeholder="Billet">
+  <input type="text" id="team" placeholder="Team">
+
+  <button onclick="generateReport()">Generate Report</button>
+
+  <h2>Generated Report</h2>
+  <div id="output"></div>
+
+  <script>
+    function getValueOrNA(id) {
+      const value = document.getElementById(id).value.trim();
+      return value === '' ? 'N/A' : value;
+    }
+
+    function generateReport() {
+      const unit = getValueOrNA('unit');
+      const date = getValueOrNA('date');
+      const map = getValueOrNA('map');
+      const composition = getValueOrNA('composition');
+      const required = getValueOrNA('required');
+      const absent = getValueOrNA('absent');
+      const nonRequired = getValueOrNA('nonRequired');
+      const results = getValueOrNA('results');
+      const condition = getValueOrNA('condition');
+      const vehicle = getValueOrNA('vehicle');
+      const sustains = getValueOrNA('sustains');
+      const improves = getValueOrNA('improves');
+      const comments = getValueOrNA('comments');
+      const name = getValueOrNA('name');
+      const billet = getValueOrNA('billet');
+      const team = getValueOrNA('team');
+
+      const report = `UNIT REPORTING
+${unit}
+
+DATE
+${date}
+
+MAP
+${map}
+
+SIZE AND COMPOSITION OF PATROL
+${composition}
+
+REQUIRED ATTENDEES
+${required}
+
+ABSENT
+${absent}
+
+NON-REQUIRED ATTENDEES
+${nonRequired}
+
+RESULTS OF ENCOUNTER WITH ENEMY
+${results}
+
+CONDITION OF PATROL INCLUDING DISPOSITION OF ANY DEAD OR WOUNDED
+${condition}
+
+VEHICLE STATUS (IF APPLICABLE)
+${vehicle}
+
+Sustains
+${sustains}
+
+Improves
+${improves}
+
+COMMENTS
+${comments}
+
+Respectfully Submitted,
+
+${name}
+${billet}
+${team}`;
+
+      document.getElementById('output').textContent = report;
+    }
+  </script>
+</body>
+</html>
